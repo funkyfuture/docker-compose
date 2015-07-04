@@ -100,7 +100,7 @@ def split_buffer(reader, separator):
     separator = str(separator)
 
     for data in reader:
-        buffered += data
+        buffered += data.decode('utf-8')
         while True:
             index = buffered.find(separator)
             if index == -1:
