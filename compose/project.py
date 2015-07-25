@@ -200,6 +200,14 @@ class Project(object):
         for service in reversed(self.get_services(service_names)):
             service.stop(**options)
 
+    def pause(self, service_names=None, **options):
+        for service in reversed(self.get_services(service_names)):
+            service.pause(**options)
+
+    def unpause(self, service_names=None, **options):
+        for service in self.get_services(service_names):
+            service.unpause(**options)
+
     def kill(self, service_names=None, **options):
         for service in reversed(self.get_services(service_names)):
             service.kill(**options)
