@@ -296,7 +296,7 @@ class Service(object):
         config_hash = None
 
         try:
-            config_hash = self.config_hash()
+            config_hash = self.config_hash
         except NoSuchImageError as e:
             log.debug(
                 'Service %s has diverged: %s',
@@ -426,6 +426,7 @@ class Service(object):
             else:
                 numbers.add(c.number)
 
+    @property
     def config_hash(self):
         return json_hash(self.config_dict())
 
@@ -539,7 +540,7 @@ class Service(object):
         container_options['name'] = self.get_container_name(number, one_off)
 
         if add_config_hash:
-            config_hash = self.config_hash()
+            config_hash = self.config_hash
             if 'labels' not in container_options:
                 container_options['labels'] = {}
             container_options['labels'][LABEL_CONFIG_HASH] = config_hash
